@@ -2,102 +2,102 @@ export let nodes = [
   {
     id: 0,
     name: 'avt business school',
-    color: '#'
+    color: '#733133'
   },
   {
     id: 1,
     name: 'grundfos',
-    color: '#'
+    color: '#bd3e8f'
   },
   {
     id: 2,
     name: 'danske bank',
-    color: '#'
+    color: '#65824c'
   },
   {
     id: 3,
     name: 'lego',
-    color: '#'
+    color: '#d75c21'
   },
   {
     id: 4,
     name: 'microsoft',
-    color: '#'
+    color: '#9e8d31'
   },
   {
     id: 5,
     name: 'maersk',
-    color: '#'
+    color: '#4985c3'
   },
   {
     id: 6,
     name: 'deloitte',
-    color: '#'
+    color: '#6f3a96'
   },
   {
     id: 7,
     name: 'coop',
-    color: '#'
+    color: '#65824c'
   },
   {
     id: 8,
     name: 'capgemini',
-    color: '#'
+    color: '#bd3e8f'
   },
   {
     id: 9,
     name: 'naviair',
-    color: '#'
+    color: '#4985c3'
   },
   {
     id: 10,
     name: 'novo nordisk',
-    color: '#'
+    color: '#6f3a96'
   },
   {
     id: 11,
     name: 'dong',
-    color: '#'
+    color: '#18345b'
   },
   {
     id: 12,
     name: 'nordea',
-    color: '#'
+    color: '#bd3e8f'
   },
   {
     id: 13,
     name: 'alk abello',
-    color: '#'
+    color: '#65824c'
   },
   {
     id: 14,
     name: 'iss',
-    color: '#'
+    color: '#4985c3'
   },
   {
     id: 15,
     name: 'nomeco',
-    color: '#'
+    color: '#d75c21'
   },
   {
     id: 16,
     name: 'hp',
-    color: '#'
+    color: '#18345b'
   },
   {
     id: 17,
     name: 'sas',
-    color: '#'
+    color: '#9e8d31'
   },
   {
     id: 18,
     name: 'tdc',
-    color: '#'
+    color: '#18345b'
   },
   {
     id: 19,
     name: 'coloplast',
-    color: '#'
+    color: '#d75c21'
   },
   {
     id: 20,
@@ -107,7 +107,7 @@ export let nodes = [
       'Humac',
       'MBA 2013'
     ],
-    image: ''
+    image: '2.png'
   },
   {
     id: 21,
@@ -117,7 +117,7 @@ export let nodes = [
       'LM Information Delivery',
       'MBA 2015'
     ],
-    image: ''
+    image: '3.png'
   },
   {
     id: 22,
@@ -126,7 +126,7 @@ export let nodes = [
       'Industrial Postdoctoral Fellow',
       'Lundbeck'
     ],
-    image: ''
+    image: '1.png'
   },
   {
     id: 23,
@@ -137,7 +137,7 @@ export let nodes = [
       'Carlsberg, China',
       'CBA 2013'
     ],
-    image: ''
+    image: '6.png'
   },
   {
     id: 24,
@@ -158,7 +158,7 @@ export let nodes = [
       'Alcon',
       'MBA 2015'
     ],
-    image: ''
+    image: '4.png'
   },
   {
     id: 26,
@@ -178,7 +178,7 @@ export let nodes = [
       'Zealang Pharma',
       'MBA 2014'
     ],
-    image: ''
+    image: '5.png'
   }
 ]
 
