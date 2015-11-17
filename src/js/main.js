@@ -1,4 +1,2 @@
+import d3 from 'd3'
 import {nodes, links} from './data'
-
-console.log(nodes.length)
-console.log(links.length)
