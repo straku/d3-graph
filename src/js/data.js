@@ -1,135 +1,186 @@
 export let nodes = [
   {
-    id: 0,
+    index: 0,
     name: 'avt business school',
-    color: '#733133'
+    color: '#733133',
+    fixed: true,
+    x: 50,
+    y: 50
   },
   {
-    id: 1,
+    index: 1,
     name: 'grundfos',
-    color: '#bd3e8f'
+    color: '#bd3e8f',
+    x: 50,
+    y: 72
   },
   {
-    id: 2,
+    index: 2,
     name: 'danske bank',
-    color: '#65824c'
+    color: '#65824c',
+    x: 62,
+    y: 62
   },
   {
-    id: 3,
+    index: 3,
     name: 'lego',
-    color: '#d75c21'
+    color: '#d75c21',
+    x: 65,
+    y: 41
   },
   {
-    id: 4,
+    index: 4,
     name: 'microsoft',
-    color: '#9e8d31'
+    color: '#9e8d31',
+    x: 44,
+    y: 23
   },
   {
-    id: 5,
+    index: 5,
     name: 'maersk',
-    color: '#4985c3'
+    color: '#4985c3',
+    x: 39,
+    y: 62
   },
   {
-    id: 6,
+    index: 6,
     name: 'deloitte',
-    color: '#6f3a96'
+    color: '#6f3a96',
+    x: 23,
+    y: 60
   },
   {
-    id: 7,
+    index: 7,
     name: 'coop',
-    color: '#65824c'
+    color: '#65824c',
+    x: 15,
+    y: 40
   },
   {
-    id: 8,
+    index: 8,
     name: 'capgemini',
-    color: '#bd3e8f'
+    color: '#bd3e8f',
+    x: 4.5,
+    y: 27
   },
   {
-    id: 9,
+    index: 9,
     name: 'naviair',
-    color: '#4985c3'
+    color: '#4985c3',
+    x: 14,
+    y: 8.5
   },
   {
-    id: 10,
+    index: 10,
     name: 'novo nordisk',
-    color: '#6f3a96'
+    color: '#6f3a96',
+    x: 83,
+    y: 33
   },
   {
-    id: 11,
+    index: 11,
     name: 'dong',
-    color: '#18345b'
+    color: '#18345b',
+    x: 69,
+    y: 14
   },
   {
-    id: 12,
+    index: 12,
     name: 'nordea',
-    color: '#bd3e8f'
+    color: '#bd3e8f',
+    x: 52,
+    y: 6
+
   },
   {
-    id: 13,
+    index: 13,
     name: 'alk abello',
-    color: '#65824c'
+    color: '#65824c',
+    x: 95,
+    y: 41
   },
   {
-    id: 14,
+    index: 14,
     name: 'iss',
-    color: '#4985c3'
+    color: '#4985c3',
+    x: 88,
+    y: 64
   },
   {
-    id: 15,
+    index: 15,
     name: 'nomeco',
-    color: '#d75c21'
+    color: '#d75c21',
+    x: 93,
+    y: 89
   },
   {
-    id: 16,
+    index: 16,
     name: 'hp',
-    color: '#18345b'
+    color: '#18345b',
+    x: 76,
+    y: 82
   },
   {
-    id: 17,
+    index: 17,
     name: 'sas',
-    color: '#9e8d31'
+    color: '#9e8d31',
+    x: 45,
+    y: 92
   },
   {
-    id: 18,
+    index: 18,
     name: 'tdc',
-    color: '#18345b'
+    color: '#18345b',
+    x: 17,
+    y: 92
   },
   {
-    id: 19,
+    index: 19,
     name: 'coloplast',
-    color: '#d75c21'
+    color: '#d75c21',
+    x: 5,
+    y: 82
   },
   {
-    id: 20,
+    index: 20,
     name: 'Michael Bech',
     description: [
       'CEO',
       'Humac',
       'MBA 2013'
     ],
-    image: '2.png'
+    image: '2.png',
+    fixed: true,
+    x: 57,
+    y: 24
   },
   {
-    id: 21,
+    index: 21,
     name: 'Nels Rune Jensen',
     description: [
       'Chief Commercial Officer',
       'LM Information Delivery',
       'MBA 2015'
     ],
-    image: '3.png'
+    image: '3.png',
+    fixed: true,
+    x: 36,
+    y: 41
   },
   {
-    id: 22,
+    index: 22,
     name: 'Helle Sickmann',
     description: [
       'Industrial Postdoctoral Fellow',
       'Lundbeck'
     ],
-    image: '1.png'
+    image: '1.png',
+    fixed: true,
+    x: 26,
+    y: 17
   },
   {
-    id: 23,
+    index: 23,
     // TODO: Change 'o' to weird 'o'
     name: 'Anne Brondsted',
     description: [
@@ -137,10 +188,13 @@ export let nodes = [
       'Carlsberg, China',
       'CBA 2013'
     ],
-    image: '6.png'
+    image: '6.png',
+    fixed: true,
+    x: 32,
+    y: 87
   },
   {
-    id: 24,
+    index: 24,
     // TODO: Change 'o' to weird 'o'
     name: 'Kent Dupont Walhoj',
     description: [
@@ -148,37 +202,49 @@ export let nodes = [
       'Nordania Leasing',
       'CBA 2014'
     ],
-    image: ''
+    image: '7.png',
+    fixed: true,
+    x: 63,
+    y: 92
   },
   {
-    id: 25,
+    index: 25,
     name: 'Tina Vinther',
     description: [
       'Sales Manager',
       'Alcon',
       'MBA 2015'
     ],
-    image: '4.png'
+    image: '4.png',
+    fixed: true,
+    x: 74,
+    y: 54
   },
   {
-    id: 26,
+    index: 26,
     name: 'Mads Tofte',
     description: [
       'Chancellor',
       'IT University of Copenhagen',
       'MBA 2014'
     ],
-    image: ''
+    image: '8.png',
+    fixed: true,
+    x: 89,
+    y: 13
   },
   {
-    id: 27,
+    index: 27,
     name: 'Rasmus Just',
     description: [
       'Principal Scientist',
       'Zealang Pharma',
       'MBA 2014'
     ],
-    image: '5.png'
+    image: '5.png',
+    fixed: true,
+    x: 6,
+    y: 57
   }
 ]
 
