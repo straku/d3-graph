@@ -6,7 +6,6 @@ var gulp = require('gulp'),
   sass = require('gulp-sass'),
   autoprefixer = require('gulp-autoprefixer'),
   livereload = require('gulp-livereload'),
-  colors = require('colors'),
   source = require('vinyl-source-stream');
 
 var babelifyConfig = {
