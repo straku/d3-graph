@@ -118,4 +118,4 @@ force.on('tick', () => {
     .attr('y2', d => d.target.y)
 })
 
-//runAnimation(force)
+runAnimation(force)
