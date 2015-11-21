@@ -2,11 +2,10 @@ import d3 from 'd3'
 import 'sugar'
 
 import {nodes, links} from './data'
-import {collide} from './physics'
+import {collide, position} from './physics'
 import {run as runAnimation} from './animation'
 
-let container = document.getElementsByClassName('container')[0],
-  btn = document.getElementById('mix')
+let container = document.getElementsByClassName('container')[0]
 
 let width = container.clientWidth,
   height = width * 900 / 1600
@@ -25,6 +24,7 @@ let nodesParsed = nodes.map((item, i) => {
     name: item.name,
     color: item.color,
     fixed: item.fixed,
+    image: item.image,
     x: item.x / 100 * width,
     y: item.y / 100 * height,
     radius
@@ -36,9 +36,8 @@ let nodesParsed = nodes.map((item, i) => {
 let force = d3.layout.force()
   .gravity(0)
   .friction(0.05)
-  .linkDistance(230)
+  .linkDistance(d => 230 * (d.distance || 1))
   .linkStrength(0.5)
-  .charge(-300)
   .size([width, height])
 
 let svg = d3.select('.container').append('svg')
@@ -58,12 +57,43 @@ let link = svg.selectAll('.link')
 
 let node = svg.selectAll('.node')
   .data(nodesParsed)
-  .enter().append('circle')
+  .enter().append('g')
   .attr('class', 'node')
+  .call(force.drag)
+
+node.filter(d => d.image)
+  .append('image')
+  .attr('xlink:href', d => `images/${d.image}`)
+  .attr('x', d => -d.radius)
+  .attr('y', d => -d.radius)
+  .attr('width', d => d.radius * 2)
+  .attr('height', d => d.radius * 2)
+
+node.filter(d => !d.image)
+  .append('circle')
   .attr('r', d => d.radius)
   .style('fill', d => d.color)
   .style('stroke', d => d3.rgb(d.color).darker())
-  .call(force.drag)
+
+node.filter(d => !d.image)
+  .append('text')
+  .attr('class', d => (d.index === 0) ? 'label main' : 'label')
+  .each(function (d) {
+    if (Object.isArray(d.name)) {
+      d.name.forEach((line, i) => {
+        d3.select(this).append('tspan')
+          .attr('x', 0)
+          .attr('y', `${i * 1.2 - 0.35}em`)
+          .attr('text-anchor', 'middle')
+          .text(line)
+      })
+    } else {
+      d3.select(this)
+        .attr('dy', '.35em')
+        .attr('text-anchor', 'middle')
+        .text(d.name)
+    }
+  })
 
 force.on('tick', () => {
   let q = d3.geom.quadtree(nodesParsed),
@@ -74,9 +104,12 @@ force.on('tick', () => {
     q.visit(collide(nodesParsed[i]))
   }
 
-  node
-    .attr('cx', d => d.x = Math.max(d.radius, Math.min(width - d.radius, d.x)))
-    .attr('cy', d => d.y = Math.max(d.radius, Math.min(height - d.radius, d.y)))
+  node.attr('transform', d => {
+    let pos = position(d, width, height)
+    d.x = pos.x
+    d.y = pos.y
+    return pos.transform
+  })
 
   link
     .attr('x1', d => d.source.x)
@@ -85,4 +118,4 @@ force.on('tick', () => {
     .attr('y2', d => d.target.y)
 })
 
-runAnimation(force)
+//runAnimation(force)

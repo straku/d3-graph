@@ -1,7 +1,7 @@
 export let nodes = [
   {
     index: 0,
-    name: 'avt business school',
+    name: ['avt business', 'school'],
     color: '#733133',
     fixed: true,
     x: 50,
@@ -16,7 +16,7 @@ export let nodes = [
   },
   {
     index: 2,
-    name: 'danske bank',
+    name: ['danske', 'bank'],
     color: '#65824c',
     x: 62,
     y: 62
@@ -72,7 +72,7 @@ export let nodes = [
   },
   {
     index: 10,
-    name: 'novo nordisk',
+    name: ['novo', 'nordisk'],
     color: '#6f3a96',
     x: 83,
     y: 33
@@ -94,7 +94,7 @@ export let nodes = [
   },
   {
     index: 13,
-    name: 'alk abello',
+    name: ['alk', 'abello'],
     color: '#65824c',
     x: 95,
     y: 41
@@ -191,7 +191,7 @@ export let nodes = [
     image: '6.png',
     fixed: true,
     x: 32,
-    y: 87
+    y: 80
   },
   {
     index: 24,
@@ -267,7 +267,8 @@ export let links = [
   {
     source: 0,
     target: 1,
-    strength: 2
+    strength: 2,
+    distance: 1.6
   },
   {
     source: 0,
@@ -387,7 +388,8 @@ export let links = [
   {
     source: 1,
     target: 16,
-    strength: 1
+    strength: 1,
+    distance: 1.8
   },
   {
     source: 1,
@@ -462,7 +464,8 @@ export let links = [
   {
     source: 4,
     target: 7,
-    strength: 1
+    strength: 1,
+    distance: 2
   },
   {
     source: 11,
@@ -472,7 +475,8 @@ export let links = [
   {
     source: 11,
     target: 25,
-    strength: 1
+    strength: 1,
+    distance: 1.8
   },
   {
     source: 11,
@@ -552,12 +556,14 @@ export let links = [
   {
     source: 6,
     target: 18,
-    strength: 1
+    strength: 1,
+    distance: 2
   },
   {
     source: 6,
     target: 19,
-    strength: 1
+    strength: 1,
+    distance: 1.5
   },
   {
     source: 18,

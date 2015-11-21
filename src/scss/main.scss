@@ -1,7 +1,11 @@
 $font-color: #530b16;
 $link-color: #a2a2a2;
 
-@import url(https://fonts.googleapis.com/css?family=Titillium+Web:600,700);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700);
+
+html {
+  font-size: 12px;
+}
 
 body {
   width: 100%;
@@ -24,4 +28,18 @@ body {
 
 .node {
   stroke-width: 1;
+}
+
+.label {
+  font-family: "Titillium Web";
+  text-transform: uppercase;
+  font-weight: 400;
+
+  fill: white;
+
+  font-size: 1.2rem;
+
+  &.main {
+    font-size: 1.5rem;
+  }
 }

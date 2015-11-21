@@ -7,6 +7,7 @@ let Type = {
 }
 
 let animate = (force, type) => {
+  let relativeStrentgh = animation.strength * animation.contractionTime / animation.relaxationTime
   switch (type) {
     case Type.CONTRACTION:
       force.charge(animation.strength)
@@ -14,7 +15,7 @@ let animate = (force, type) => {
       animate.delay(animation.contractionTime, force, Type.RELAXATION)
       break
     case Type.RELAXATION:
-      force.charge(-animation.strength)
+      force.charge(-relativeStrentgh)
       force.start()
       animate.delay(animation.relaxationTime, force, Type.CONTRACTION)
       break
