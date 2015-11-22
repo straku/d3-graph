@@ -187,8 +187,7 @@ export let nodes = [
   },
   {
     index: 23,
-    // TODO: Change 'o' to weird 'o'
-    name: 'Anne Brondsted',
+    name: 'Anne Brøndsted',
     description: [
       'Senior Marketing Innovation Manager',
       'Carlsberg, China',
@@ -202,8 +201,7 @@ export let nodes = [
   },
   {
     index: 24,
-    // TODO: Change 'o' to weird 'o'
-    name: 'Kent Dupont Walhoj',
+    name: 'Kent Dupont Walhøj',
     description: [
       'Vice President',
       'Nordania Leasing',

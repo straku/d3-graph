@@ -6,10 +6,14 @@ import {collide, position} from './physics'
 import {run as runAnimation} from './animation'
 import config from './graph-config'
 
-let container = document.getElementsByClassName('container')[0]
+let $graph = document.getElementById('graph')
 
-let width = container.clientWidth,
-  height = width * 900 / 1600
+let fixedWidth = 1600,
+  fixedHeight = 900
+
+let width = $graph.clientWidth,
+  scale = width / fixedWidth,
+  height = scale * fixedHeight
 
 let fixed = []
 
@@ -22,8 +26,8 @@ let nodesParsed = nodes.map((item, i) => {
     radius = config.graph.radius.faces
   }
 
-  let x = item.x / 100 * width,
-    y = item.y / 100 * height
+  let x = item.x / 100 * fixedWidth,
+    y = item.y / 100 * fixedHeight
 
   if (item.fixed) {
     fixed.push({x, y, radius})
@@ -44,33 +48,37 @@ let force = d3.layout.force()
   .linkDistance(d => config.graph.linkDistance * (d.distance || 1))
   .charge(d => (d.pull) ? config.graph.pullStrength : 0)
   .linkStrength(config.graph.linkStrength)
-  .size([width, height])
+  .size([fixedWidth, fixedHeight])
 
-let svg = d3.select('.container').append('svg')
+let svg = d3.select('#graph').append('svg')
   .attr('width', width)
   .attr('height', height)
   .on('mouseover', mouseover)
   .on('mouseout', mouseout)
   .on('mousemove', mousemove)
 
-svg.append('rect')
+let container = svg.append('g')
+  .attr('width', fixedWidth)
+  .attr('height', fixedHeight)
+
+container.append('rect')
   .attr('class', 'background')
-  .attr('width', width)
-  .attr('height', height)
+  .attr('width', fixedWidth)
+  .attr('height', fixedWidth)
 
 force
   .nodes(nodesParsed)
   .links(links)
   .start()
 
-let link = svg.selectAll('.link')
+let link = container.selectAll('.link')
   .data(links)
   .enter().append('line')
   .attr('class', 'link')
   .attr('pointer-events', 'none')
   .style('stroke-width', d => d.strength)
 
-let node = svg.selectAll('.node')
+let node = container.selectAll('.node')
   .data(nodesParsed)
   .enter().append('g')
   .attr('class', 'node')
@@ -160,7 +168,7 @@ force.on('tick', () => {
   collide(nodesParsed)
 
   node.attr('transform', d => {
-    let pos = position(d, width, height)
+    let pos = position(d, fixedWidth, fixedHeight)
     d.x = pos.x
     d.y = pos.y
     return pos.transform
@@ -173,13 +181,17 @@ force.on('tick', () => {
     .attr('y2', d => d.target.y)
 })
 
+function zoom(scale) {
+  container.attr('transform', `scale(${scale})`)
+}
+
 function mouseover() {
   let point = d3.mouse(this)
 
   nodesParsed.push({
     pull: true,
-    x: point[0],
-    y: point[1],
+    x: point[0] * (1 / scale),
+    y: point[1] * (1 / scale),
     radius: 1
   })
 
@@ -195,8 +207,8 @@ function mousemove() {
   let last = nodesParsed[nodesParsed.length - 1],
     point = d3.mouse(this)
 
-  let x = point[0],
-    y = point[1]
+  let x = point[0] * (1 / scale),
+    y = point[1] * (1 / scale)
 
   let stop = fixed.some(node => {
     let nx = node.x,
@@ -207,11 +219,26 @@ function mousemove() {
   })
 
   if (!stop) {
-    last.x = point[0]
-    last.y = point[1]
+    last.x = point[0] * (1 / scale)
+    last.y = point[1] * (1 / scale)
   }
 
   force.resume()
 }
+
+function resize() {
+  let w = $graph.clientWidth,
+    scale = w / fixedWidth
+
+  svg
+    .attr('width', w)
+    .attr('height', scale * fixedHeight)
+
+  zoom(scale)
+}
+
+zoom(scale)
+
+window.addEventListener('resize', resize.debounce(250), false)
 
 runAnimation(force)
