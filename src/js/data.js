@@ -149,6 +149,8 @@ export let nodes = [
       'Humac',
       'MBA 2013'
     ],
+    placement: 'right',
+    top: 39.86,
     image: '2.png',
     fixed: true,
     x: 57,
@@ -162,6 +164,8 @@ export let nodes = [
       'LM Information Delivery',
       'MBA 2015'
     ],
+    placement: 'left',
+    top: 26.57,
     image: '3.png',
     fixed: true,
     x: 36,
@@ -174,6 +178,8 @@ export let nodes = [
       'Industrial Postdoctoral Fellow',
       'Lundbeck'
     ],
+    placement: 'right',
+    top: 18.18,
     image: '1.png',
     fixed: true,
     x: 26,
@@ -188,6 +194,7 @@ export let nodes = [
       'Carlsberg, China',
       'CBA 2013'
     ],
+    placement: 'bottom',
     image: '6.png',
     fixed: true,
     x: 32,
@@ -202,6 +209,8 @@ export let nodes = [
       'Nordania Leasing',
       'CBA 2014'
     ],
+    placement: 'right',
+    top: 32.87,
     image: '7.png',
     fixed: true,
     x: 63,
@@ -215,6 +224,8 @@ export let nodes = [
       'Alcon',
       'MBA 2015'
     ],
+    placement: 'right',
+    top: 24.48,
     image: '4.png',
     fixed: true,
     x: 74,
@@ -228,6 +239,8 @@ export let nodes = [
       'IT University of Copenhagen',
       'MBA 2014'
     ],
+    placement: 'left',
+    top: 0,
     image: '8.png',
     fixed: true,
     x: 89,
@@ -241,6 +254,8 @@ export let nodes = [
       'Zealang Pharma',
       'MBA 2014'
     ],
+    placement: 'right',
+    top: 27.97,
     image: '5.png',
     fixed: true,
     x: 6,

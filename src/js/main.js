@@ -25,17 +25,14 @@ let nodesParsed = nodes.map((item, i) => {
     y = item.y / 100 * height
 
   if (item.fixed) {
-    fixed.push({x,y,radius})
+    fixed.push({x, y, radius})
   }
 
-  let props = {
-    index: item.index,
-    name: item.name,
-    color: item.color,
-    fixed: item.fixed,
-    image: item.image,
-    x, y, radius
-  }
+  let props = Object.assign({}, item)
+
+  props.x = x
+  props.y = y
+  props.radius = radius
 
   return props
 })
@@ -51,9 +48,9 @@ let force = d3.layout.force()
 let svg = d3.select('.container').append('svg')
   .attr('width', width)
   .attr('height', height)
-  .on('mouseover', mouseover)
-  .on('mouseout', mouseout)
-  .on('mousemove', mousemove)
+.on('mouseover', mouseover)
+.on('mouseout', mouseout)
+.on('mousemove', mousemove)
 
 svg.append('rect')
   .attr('class', 'background')
@@ -85,6 +82,50 @@ node.filter(d => d.image)
   .attr('y', d => -d.radius)
   .attr('width', d => d.radius * 2)
   .attr('height', d => d.radius * 2)
+
+node.filter(d => d.image)
+  .append('text')
+  .attr('class', 'label-image')
+  .attr('pointer-events', 'none')
+  .each(function (d) {
+    let text = d3.select(this),
+      anchor = 'start',
+      x, y
+
+    switch (d.placement) {
+      case 'left':
+        x = -(d.radius + 10)
+        y = d.radius * (d.top / 50 - 1)
+        anchor = 'end'
+        break
+      case 'right':
+        x = d.radius + 10
+        y = d.radius * (d.top / 50 - 1)
+        break
+      case 'bottom':
+        x = -(d.radius - 5)
+        y = d.radius + 10
+        break
+    }
+
+    text
+      .attr('text-anchor', anchor)
+      .attr('x', x)
+      .attr('y', y)
+      .attr('dy', '.71em')
+      .append('tspan')
+      .attr('class', 'name')
+      .text(d.name)
+
+    d.description.forEach((item, i) => {
+      text.append('tspan')
+        .attr('class', (i === 2) ? 'desc strong' : 'desc')
+        .attr('x', x)
+        .attr('y', y)
+        .attr('dy', `${(i + 1) * 1.2 + 0.71}em`)
+        .text(item)
+    })
+  })
 
 node.filter(d => !d.image)
   .append('circle')
