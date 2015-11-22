@@ -4,6 +4,7 @@ import 'sugar'
 import {nodes, links} from './data'
 import {collide, position} from './physics'
 import {run as runAnimation} from './animation'
+import config from './graph-config'
 
 let container = document.getElementsByClassName('container')[0]
 
@@ -13,12 +14,12 @@ let width = container.clientWidth,
 let fixed = []
 
 let nodesParsed = nodes.map((item, i) => {
-  let radius = 50
+  let radius = config.graph.radius.secondary
 
   if (i === 0) {
-    radius = 85
-  } else if (i >= 20) {
-    radius = 65
+    radius = config.graph.radius.main
+  } else if (item.image) {
+    radius = config.graph.radius.faces
   }
 
   let x = item.x / 100 * width,
@@ -39,18 +40,18 @@ let nodesParsed = nodes.map((item, i) => {
 
 let force = d3.layout.force()
   .gravity(0)
-  .friction(0.05)
-  .linkDistance(d => 230 * (d.distance || 1))
-  .charge(d => (d.pull) ? 20000 : 0)
-  .linkStrength(0.3)
+  .friction(config.graph.friction)
+  .linkDistance(d => config.graph.linkDistance * (d.distance || 1))
+  .charge(d => (d.pull) ? config.graph.pullStrength : 0)
+  .linkStrength(config.graph.linkStrength)
   .size([width, height])
 
 let svg = d3.select('.container').append('svg')
   .attr('width', width)
   .attr('height', height)
-.on('mouseover', mouseover)
-.on('mouseout', mouseout)
-.on('mousemove', mousemove)
+  .on('mouseover', mouseover)
+  .on('mouseout', mouseout)
+  .on('mousemove', mousemove)
 
 svg.append('rect')
   .attr('class', 'background')
