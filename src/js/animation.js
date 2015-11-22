@@ -6,7 +6,7 @@ import {links} from './data'
 let params = []
 
 for(let i = 0, k = links.length; i < k; i++) {
-  params.push(Number.random(-10, 10))
+  params.push(Number.random(-20, 20))
 }
 
 //let period = 100

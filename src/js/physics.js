@@ -1,5 +1,7 @@
-export function collide(node) {
-  let r = node.radius + 16,
+import d3 from 'd3'
+
+function singleCollide(node) {
+  let r = node.radius,
     nx1 = node.x - r,
     nx2 = node.x + r,
     ny1 = node.y - r,
@@ -21,6 +23,16 @@ export function collide(node) {
       }
     }
     return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1
+  }
+}
+
+export function collide(nodes) {
+  let q = d3.geom.quadtree(nodes),
+    i = 0,
+    n = nodes.length
+
+  while (++i < n) {
+    q.visit(singleCollide(nodes[i]))
   }
 }
 

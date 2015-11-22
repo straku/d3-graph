@@ -22,24 +22,30 @@ body {
   min-width: 1024px;
 }
 
-.link {
-  stroke: $link-color;
-}
+svg {
+  rect.background {
+    fill: white;
+  }
 
-.node {
-  stroke-width: 1;
-}
+  .link {
+    stroke: $link-color;
+  }
 
-.label {
-  font-family: "Titillium Web";
-  text-transform: uppercase;
-  font-weight: 400;
+  .node {
+    stroke-width: 1;
+  }
 
-  fill: white;
+  .label {
+    font-family: "Titillium Web";
+    text-transform: uppercase;
+    font-weight: 400;
 
-  font-size: 1.2rem;
+    fill: white;
 
-  &.main {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+
+    &.main {
+      font-size: 1.5rem;
+    }
   }
 }
