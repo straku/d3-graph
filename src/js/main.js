@@ -1,5 +1,6 @@
-import d3 from 'd3'
 import 'sugar'
+
+import d3 from 'd3'
 
 import {nodes, links} from './data'
 import {collide, position} from './physics'

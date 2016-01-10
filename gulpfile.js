@@ -1,12 +1,12 @@
-var gulp = require('gulp'),
-  del = require('del'),
-  browserify = require('browserify'),
-  watchify = require('watchify'),
-  babelify = require('babelify'),
-  sass = require('gulp-sass'),
-  autoprefixer = require('gulp-autoprefixer'),
-  livereload = require('gulp-livereload'),
-  source = require('vinyl-source-stream');
+var gulp = require('gulp');
+var del = require('del');
+var browserify = require('browserify');
+var watchify = require('watchify');
+var babelify = require('babelify');
+var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
+var livereload = require('gulp-livereload');
+var source = require('vinyl-source-stream');
 
 var babelifyConfig = {
   presets: ['es2015'],
