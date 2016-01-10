@@ -7,18 +7,18 @@ import {collide, position} from './physics'
 import {run as runAnimation} from './animation'
 import config from './graph-config'
 
-let $graph = document.getElementById('graph')
+const $graph = document.getElementById('graph')
 
-let fixedWidth = 1600,
-  fixedHeight = 900
+const fixedWidth = 1600
+const fixedHeight = 900
 
-let width = $graph.clientWidth,
-  scale = width / fixedWidth,
-  height = scale * fixedHeight
+const width = $graph.clientWidth
+const scale = width / fixedWidth
+const height = scale * fixedHeight
 
-let fixed = []
+const fixed = []
 
-let nodesParsed = nodes.map((item, i) => {
+const nodesParsed = nodes.map((item, i) => {
   let radius = config.graph.radius.secondary
 
   if (i === 0) {
@@ -27,23 +27,17 @@ let nodesParsed = nodes.map((item, i) => {
     radius = config.graph.radius.faces
   }
 
-  let x = item.x / 100 * fixedWidth,
-    y = item.y / 100 * fixedHeight
+  const x = item.x / 100 * fixedWidth
+  const y = item.y / 100 * fixedHeight
 
   if (item.fixed) {
     fixed.push({x, y, radius})
   }
 
-  let props = Object.assign({}, item)
-
-  props.x = x
-  props.y = y
-  props.radius = radius
-
-  return props
+  return Object.assign({}, item, {x, y, radius})
 })
 
-let force = d3.layout.force()
+const force = d3.layout.force()
   .gravity(0)
   .friction(config.graph.friction)
   .linkDistance(d => config.graph.linkDistance * (d.distance || 1))
@@ -51,14 +45,14 @@ let force = d3.layout.force()
   .linkStrength(config.graph.linkStrength)
   .size([fixedWidth, fixedHeight])
 
-let svg = d3.select('#graph').append('svg')
+const svg = d3.select('#graph').append('svg')
   .attr('width', width)
   .attr('height', height)
   .on('mouseover', mouseover)
   .on('mouseout', mouseout)
   .on('mousemove', mousemove)
 
-let container = svg.append('g')
+const container = svg.append('g')
   .attr('width', fixedWidth)
   .attr('height', fixedHeight)
 
@@ -72,14 +66,14 @@ force
   .links(links)
   .start()
 
-let link = container.selectAll('.link')
+const link = container.selectAll('.link')
   .data(links)
   .enter().append('line')
   .attr('class', 'link')
   .attr('pointer-events', 'none')
   .style('stroke-width', d => d.strength)
 
-let node = container.selectAll('.node')
+const node = container.selectAll('.node')
   .data(nodesParsed)
   .enter().append('g')
   .attr('class', 'node')
@@ -98,9 +92,10 @@ node.filter(d => d.image)
   .attr('class', 'label-image')
   .attr('pointer-events', 'none')
   .each(function (d) {
-    let text = d3.select(this),
-      anchor = 'start',
-      x, y
+    const text = d3.select(this)
+    let anchor = 'start'
+    let x
+    let y
 
     switch (d.placement) {
       case 'left':
@@ -169,7 +164,7 @@ force.on('tick', () => {
   collide(nodesParsed)
 
   node.attr('transform', d => {
-    let pos = position(d, fixedWidth, fixedHeight)
+    const pos = position(d, fixedWidth, fixedHeight)
     d.x = pos.x
     d.y = pos.y
     return pos.transform
@@ -187,7 +182,7 @@ function zoom(scale) {
 }
 
 function mouseover() {
-  let point = d3.mouse(this)
+  const point = d3.mouse(this)
 
   nodesParsed.push({
     pull: true,
@@ -205,16 +200,16 @@ function mouseout() {
 }
 
 function mousemove() {
-  let last = nodesParsed[nodesParsed.length - 1],
-    point = d3.mouse(this)
+  const last = nodesParsed[nodesParsed.length - 1]
+  const point = d3.mouse(this)
 
-  let x = point[0] * (1 / scale),
-    y = point[1] * (1 / scale)
+  const x = point[0] * (1 / scale)
+  const y = point[1] * (1 / scale)
 
-  let stop = fixed.some(node => {
-    let nx = node.x,
-      ny = node.y,
-      r = node.radius
+  const stop = fixed.some(node => {
+    const nx = node.x
+    const ny = node.y
+    const r = node.radius
 
     return (x >= nx - r) && (x < nx + r) && (y >= ny - r) && (y < ny + r)
   })
@@ -228,14 +223,14 @@ function mousemove() {
 }
 
 function resize() {
-  let w = $graph.clientWidth,
-    scale = w / fixedWidth
+  const w = $graph.clientWidth
+  const newScale = w / fixedWidth
 
   svg
     .attr('width', w)
-    .attr('height', scale * fixedHeight)
+    .attr('height', newScale * fixedHeight)
 
-  zoom(scale)
+  zoom(newScale)
 }
 
 zoom(scale)
