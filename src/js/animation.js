@@ -1,17 +1,17 @@
 import config from './graph-config'
-let {animation, graph} = config
+const {animation, graph} = config
 
 import {links} from './data'
 
-let params = links.map(() => {
-  let change = Number.random(animation.amplitudeRange[0], animation.amplitudeRange[1])
+const params = links.map(() => {
+  const change = Number.random(animation.amplitudeRange[0], animation.amplitudeRange[1])
   return Number.random() ? change : -change
 })
 
 let force = null
 
-let animate = () => {
-  let change = Math.sin(Math.PI / (2 * animation.period) * (+new Date()))
+function animate () {
+  const change = Math.sin(Math.PI / (2 * animation.period) * (+new Date()))
   force.linkDistance((d, i) => {
     return graph.linkDistance * (d.distance || 1) + params[i] * change
   })
@@ -19,7 +19,7 @@ let animate = () => {
   animate.delay(100)
 }
 
-export let run = _force => {
+export function run (_force) {
   force = _force
   animate.delay(animation.startDelay)
 }
