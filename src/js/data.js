@@ -1,4 +1,4 @@
-export let nodes = [
+export const nodes = [
   {
     index: 0,
     name: ['avt business', 'school'],
@@ -90,7 +90,6 @@ export let nodes = [
     color: '#bd3e8f',
     x: 52,
     y: 6
-
   },
   {
     index: 13,
@@ -261,7 +260,7 @@ export let nodes = [
   }
 ]
 
-export let links = [
+export const links = [
   {
     source: 0,
     target: 4,
