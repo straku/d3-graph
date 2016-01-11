@@ -7,41 +7,64 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var livereload = require('gulp-livereload');
 var source = require('vinyl-source-stream');
+var streamify = require('gulp-streamify');
+var uglify = require('gulp-uglify');
 
 var babelifyConfig = {
   presets: ['es2015'],
   sourceMaps: 'inline'
 };
 
-function clean() {
+var live = false;
+
+function clean () {
   del.sync(['dist/**/*']);
 }
 
-function copyHTML() {
-  gulp.src('src/index.html')
-    .pipe(gulp.dest('dist'))
-    .pipe(livereload());
+function setLivereload () {
+  live = true;
 }
 
-function copyImages() {
-  gulp.src('src/images/**/*')
+function copyHTML () {
+  var task = gulp
+    .src('src/index.html')
+    .pipe(gulp.dest('dist'));
+
+  if (live) {
+    task.pipe(livereload());
+  }
+}
+
+function copyImages () {
+  var task = gulp
+    .src('src/images/**/*')
     .pipe(gulp.dest('dist/images'));
+
+  if (live) {
+    task.pipe(livereload());
+  }
 }
 
-function compileSCSS() {
-  gulp.src('src/scss/main.scss')
+function compileSCSS () {
+  var task = gulp
+    .src('src/scss/main.scss')
     .pipe(sass())
     .pipe(autoprefixer({
       browsers: ['last 2 versions']
     }))
-    .pipe(gulp.dest('dist/css/'))
-    .pipe(livereload());
+    .pipe(gulp.dest('dist/css/'));
+
+
+  if (live) {
+    task.pipe(livereload())
+  }
 }
 
 gulp.task('clean', clean);
 gulp.task('copy-html', copyHTML);
 gulp.task('copy-images', copyImages);
 gulp.task('scss', compileSCSS);
+gulp.task('set-livereload', setLivereload);
 
 gulp.task("watchify-init", function () {
   var b = watchify(browserify({
@@ -54,6 +77,8 @@ gulp.task("watchify-init", function () {
 
   b.on('update', bundle);
   bundle();
+
+  livereload.listen();
 
   function bundle() {
     b
@@ -69,10 +94,23 @@ gulp.task("watchify-init", function () {
 });
 
 gulp.task('watch', function () {
-  livereload.listen();
   gulp.watch('src/*.html', copyHTML);
   gulp.watch('src/scss/*.scss', compileSCSS);
   gulp.watch('src/images/**.*', copyImages);
 });
 
-gulp.task('default', ['clean', 'copy-html', 'copy-images', 'scss', 'watchify-init', 'watch']);
+gulp.task('build', ['clean', 'copy-html', 'copy-images', 'scss'], function () {
+  return browserify('src/js/main.js', {
+    debug: false,
+    fullPaths: false,
+    transform: [babelify.configure(babelifyConfig)]
+  })
+    .bundle()
+    .pipe(source('main.js'))
+    .pipe(streamify(uglify({
+      mangle: true
+    })))
+    .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task('default', ['clean', 'set-livereload', 'copy-html', 'copy-images', 'scss', 'watchify-init', 'watch']);
