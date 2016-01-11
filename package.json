@@ -1,9 +1,12 @@
 {
   "name": "d3-graph",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "D3 graph visualization",
-  "main": "main.js",
-  "author": "Łukasz Strączyński",
+  "author": "Łukasz Strączyński <l.straczynski@hotmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/straku/d3-graph.git"
+  },
   "devDependencies": {
     "babel-preset-es2015": "*",
     "babelify": "*",
@@ -14,6 +17,7 @@
     "gulp-livereload": "*",
     "gulp-sass": "*",
     "gulp-streamify": "*",
+    "gulp-uglify": "*",
     "gulp-watch": "*",
     "vinyl-source-stream": "*",
     "watchify": "*"
