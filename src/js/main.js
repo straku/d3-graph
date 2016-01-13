@@ -1,6 +1,5 @@
-import 'sugar'
-
 import d3 from 'd3'
+import _ from 'lodash'
 
 import {nodes, links} from './data'
 import {collide, position} from './physics'
@@ -144,7 +143,7 @@ node.filter(d => !d.image)
   .attr('class', d => (d.index === 0) ? 'label main' : 'label')
   .attr('pointer-events', 'none')
   .each(function (d) {
-    if (Object.isArray(d.name)) {
+    if (_.isArray(d.name)) {
       d.name.forEach((line, i) => {
         d3.select(this).append('tspan')
           .attr('x', 0)
@@ -235,6 +234,6 @@ function resize() {
 
 zoom(scale)
 
-window.addEventListener('resize', resize.debounce(250), false)
+window.addEventListener('resize', _.debounce(resize, 250), false)
 
 runAnimation(force)
