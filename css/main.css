@@ -1,0 +1,41 @@
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700);
+html {
+  font-size: 12px; }
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0; }
+
+#graph {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1600px;
+  min-width: 1024px;
+  margin: 0 auto; }
+
+svg {
+  font-family: "Titillium Web", sans-serif; }
+  svg rect.background {
+    fill: white; }
+  svg .link {
+    stroke: #a2a2a2; }
+  svg .node {
+    stroke-width: 1; }
+  svg .label {
+    text-transform: uppercase;
+    font-weight: 400;
+    fill: white;
+    font-size: 1.2rem; }
+    svg .label.main {
+      font-size: 1.5rem; }
+  svg .label-image {
+    fill: #811f33; }
+    svg .label-image .name {
+      font-size: 1.1rem;
+      font-weight: 700; }
+    svg .label-image .desc {
+      font-size: 1rem;
+      font-weight: 600; }
+      svg .label-image .desc.strong {
+        font-weight: 700; }
