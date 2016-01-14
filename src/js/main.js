@@ -36,10 +36,19 @@ const nodesParsed = nodes.map((item, i) => {
   return Object.assign({}, item, {x, y, radius})
 })
 
+const linksParsed = links.map(item => {
+  return {
+    source: item.source,
+    target: item.target,
+    strength: item.strength,
+    distance: config.graph.linkDistance * (item.distance || 1)
+  }
+})
+
 const force = d3.layout.force()
   .gravity(0)
   .friction(config.graph.friction)
-  .linkDistance(d => config.graph.linkDistance * (d.distance || 1))
+  .linkDistance('distance')
   .charge(d => (d.pull) ? config.graph.pullStrength : 0)
   .linkStrength(config.graph.linkStrength)
   .size([fixedWidth, fixedHeight])
@@ -62,11 +71,11 @@ container.append('rect')
 
 force
   .nodes(nodesParsed)
-  .links(links)
+  .links(linksParsed)
   .start()
 
 const link = container.selectAll('.link')
-  .data(links)
+  .data(linksParsed)
   .enter().append('line')
   .attr('class', 'link')
   .attr('pointer-events', 'none')

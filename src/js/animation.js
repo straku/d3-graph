@@ -1,27 +1,26 @@
 import _ from 'lodash'
 
 import config from './graph-config'
-const {animation, graph} = config
+const {animation} = config
 
 import {links} from './data'
+
+const ratio = Math.PI / (2 * animation.period)
 
 const params = links.map(() => {
   const change = _.random(animation.amplitudeRange[0], animation.amplitudeRange[1])
   return _.random() ? change : -change
 })
 
-let force = null
-
-function animate () {
-  const change = Math.sin(Math.PI / (2 * animation.period) * (+new Date()))
+function animate (force) {
   force.linkDistance((d, i) => {
-    return graph.linkDistance * (d.distance || 1) + params[i] * change
+    return d.distance + params[i] * Math.sin(ratio * performance.now())
   })
   force.start()
-  _.delay(animate, 100)
 }
 
-export function run (_force) {
-  force = _force
-  _.delay(animate, animation.startDelay)
+export function run (force) {
+  _.delay(() => {
+    setInterval(() => animate(force), 100)
+  }, animation.startDelay)
 }

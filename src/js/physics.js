@@ -2,10 +2,6 @@ import d3 from 'd3'
 
 function singleCollide (node) {
   const r = node.radius
-  const nx1 = node.x - r
-  const nx2 = node.x + r
-  const ny1 = node.y - r
-  const ny2 = node.y + r
 
   return function (quad, x1, y1, x2, y2) {
     if (quad.point && (quad.point !== node)) {
@@ -22,7 +18,7 @@ function singleCollide (node) {
         quad.point.y += y
       }
     }
-    return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1
+    return x1 > node.x + r || x2 < node.x - r || y1 > node.y + r || y2 < node.y - r
   }
 }
 
