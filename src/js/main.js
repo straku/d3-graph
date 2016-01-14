@@ -48,7 +48,7 @@ const linksParsed = links.map(item => {
 const force = d3.layout.force()
   .gravity(0)
   .friction(config.graph.friction)
-  .linkDistance('distance')
+  .linkDistance(d => d.distance)
   .charge(d => (d.pull) ? config.graph.pullStrength : 0)
   .linkStrength(config.graph.linkStrength)
   .size([fixedWidth, fixedHeight])
